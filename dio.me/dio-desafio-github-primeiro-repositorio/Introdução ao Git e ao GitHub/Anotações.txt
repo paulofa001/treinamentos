@@ -1,0 +1,175 @@
+Link para download do Git: https://git-scm.com/downloads
+
+O Git Bash é um terminal extendido para otimizar o uso do Git.
+
+1. Criar chaves SSH (SSH Keys):
+
+   Gerar chaves (encriptografadas no padrão ed25519) pública e privada de autenticação
+   para acesso de uma máquina ao GitHub:
+
+	Entrar no Git Bash(CLI do Git) e digitar:
+
+	ssh-keygen -t ed25519 -C "nome do e-mail de acesso no GitHub"
+
+      No Windows o local padrão de instalação da pasta ".ssh/" costuma ser "/c/users/"nome do usuário"/.ssh/".
+      No Linux o local padrão de instalação da pasta ".ssh/" costuma ser "/home/"nome do usuário"/.ssh/". 
+      No Mac o processo é diferente e para executá-lo, seguir orientações do "GitHub Docs" no item "Gerar uma 
+      nova chave SSH e adicioná-la ao ssh-agent".
+
+	A chave pública é gerada na pasta ".ssh/" da máquina. O arquivo "id_ed25519.pub" contém a chave
+	a ser copiada para o GitHub na opção "Settings" + "SSH Keys", clicando no botão "New SSH Key". 
+
+      Após criado, para utilizar, precisa inicializar, através de comandos digitados dentro da pasta
+      "/.ssh/":
+
+	eval $(ssh-agent -s)
+      ssh-add id_ed25519
+
+      Obs: Quando se tem uma chave ssh configurado em uma máquina, não se pode clonar um repositório para essa 	máquina utilizando o caminho "HTTP" fornecido pelo GitHub, deve-se utilizar o caminho "SSH"
+ 	fornecido pelo GitHub. Para isso digitar:
+
+      git clone "caminho SSH fornecido pelo GitHub" 
+
+2. Criar token de acesso pessoal:
+
+   No GitHub na opção "Settings" + "Developer Settings" + "Personal access tokens", clicar no botão
+   "Generating new token".
+
+   Definir um nome no campos "Note", marcar a caixa "repo", definir validade do token no campo
+   "expiration" (sugestão 60 dias) e clicar no botão "Generate token".
+
+    Será gerado uma chave token a qual deverá ser guardada em local seguro para futuros acessos
+    seguros de atualização do GitHub que serão solicitados.
+
+3. Configurar máquina para atualização do GitHub de forma global:
+
+   git config --global user.email "nome do email no GitHub"
+
+   git config --global user.name  "nome do nickname no GitHub"
+
+   Obs: Para alterar esses parametros o que não é aconselhável, pois indisponibiliza o acesso ao 
+   passado criado com os parametros anterior, deve-se utilizar o seguintes comandos:
+
+   git config --global --unset user.email "nome do email no GitHub que estava configurado"
+
+   git config --global --unset user.name "nome do nickname que estava configurado"
+
+   git config --global user.email "nome do novo email configurado no GitHub"
+
+   git config --global user.name "nome do novo nickname configurado no GitHub"
+
+   Para verificar as configurações do Git digitar:
+
+   git config --list
+   
+4. Criar um repositório na máquina:
+
+   Posicionar na pasta (master ou main) que deseja que seja o inicio do seu repositório e digitar:
+
+   git init
+
+   Obs: Será gerada uma subpasta oculta chamada "/.Git/" onde serão armazenados todos os arquivos OBJETOS de controle
+   como BLOBS, TREES e COMMITS.
+
+5. Estados de um repositório no Git ou GitHub:
+
+   Tudo criado pela primeira vez dentro de uma pasta ou subpasta de um repositório fica classificado como "UNTRACKED"
+
+   Para que arquivos "UNTRACKED" ou "MODIFIED" (modificados) sejam reconhecidos pelo repositório, necessitamos 
+   move-los para modo "STAGED" (para que sejam inseridos na pasta "/.GIT/")
+   através do comando:
+
+   git add "nome do arquivo ou pasta a ser movido para o estado STAGED"
+
+   git add * ou git add . (atualiza todo o repositório para "STAGED")
+
+   Obs: Mais o repositório ainda não está pronto para atualizar o Git ou GitHub (que só aceitam atualizações
+   de arquivos e pastas no status "UNMODIFIED")
+
+6. Preparar o repositório para atualizar o Git ou GitHub:
+
+   Para colocar todas as pastas e arquivos do repositório do estágio "STAGED" para o estágio "UNMODIFIED"
+   dentro de repositório (para ficar disponível para um atualização no GitHub) é necessário no Git digitar
+   o comando:
+
+   git commit -m "mensagem informando nível de estágio dessa atualização do que foi feito"
+
+   Obs: A cada comando "git commit" que é gerado dentro do Git ou do GitHub é gerado um arquivamento daquele 
+   estágio com o histórico da mensagem informada no comando.
+
+   Obs: Antes de dar um "git commit" é ideal que seja verificado o status das pastas e arquivos do
+   repositório, para averiguar se não há nenhuma pendencia de atualização ("UNTRACKED" ou "MODIFIED").
+   Para isso digitar: 
+
+   git status
+
+   Para atualizar um repositório sincronizado entre o Git e o GitHub digitar:
+
+   Do Git para GitHub (empurrar PUSH):
+
+   git push origin master ou git push origin main
+
+   Do GitHub para o Git (puxar PULL):
+
+   git pull origin master ou git pull origin main
+   
+
+7. Apontar o seu repositório local (máquina - Git) para o repositório remoto (criado no GitHub):
+
+   Capturar no GitHub o endereço HTTPS do repositório e digitar o comando:
+
+   git remote add origin "link copiado do HTTPS do GitHub do repositório"
+
+   Obs: Se quiser verificar se foi acrescentado no GitHub, para ver a lista do que foi acrescentado digitar:
+
+   git remote -v
+
+   Obs: Este comando aponta para qual repositório no GitHub o repositorio da sua máquina está apontado.
+
+
+8. Resolução de conflitos:
+
+   Erros de atualizações simultaneas pelo Git ou GitHub ou outros Gits de outras máquinas que estejam
+   sincronizados. O que fazer através do Git da sua máquina para resolução de Conflitos:
+
+   Obs: Se ao tentarmos efetuar um comando "git push" tentando atualizar um GitHub e aparecer erros,
+   primeiramente devemos trazer a versão atual do GitHub com o comando "git pull", para que sejam 
+   verificadas as mudanças encontradas em relação as mudanças feitas na maquina e corrigi-las com as 
+   suas modificações novamente e só então fazer um novo comando "git push" conclusivo.
+
+   
+
+
+
+dir = lista de diretórios
+cd = navegar pelos diretórios
+cls = limpa o terminal
+mkdir = cria uma massa
+del = excluir arquivos
+rmdir = deletar a pasta com tudo dentro
+
+git clone +link = clona o repositório para a máquina.
+
+git init = inicializa o repositório git.
+
+adicionar git. = adiciona todas as alterações
+
+git commit -m "mensagem" = faz um commit
+
+*obs: o comando git add prepara os arquivos para serem confirmados
+
+git status = mostra o estado dos arquivos
+
+*obs: quando um arquivo está no estado staged significa que ele está pronto para ser commitado
+
+git config --list = mostra o usuário e o email junto com outras configurações do git
+
+git pull = puxa o código remoto para uma máquina local
+
+git pull origin master = puxa o código da branch master
+
+git push origin master = empurra o código para a branch master
+
+
+
+

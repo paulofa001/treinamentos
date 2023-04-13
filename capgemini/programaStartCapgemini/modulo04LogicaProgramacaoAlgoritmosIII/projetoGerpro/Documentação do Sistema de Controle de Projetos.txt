@@ -1,0 +1,64 @@
+Definição do Projeto de Sistema de Controle de Projetos:
+
+
+Controle de Projetos
+
+Descrição: Aplicação para o gerenciamento de projetos e as tarefas envolvidas nesses projetos.
+
+Objetivo: Resolver a questão de organização de tarefas de um ou vários projetos.
+
+Entidades:
+
+* Projetos - Atributos:
+  - Nome (name)
+  - Descrição (description)
+  - Data de Criação (createdAt)
+  - Data de Atualização (updatedAt)
+
+* Tarefas - Atributos:
+  - Nome (name)
+  - Descrição (description)
+  - Status (completed - isCompleted)
+  - Observações (notes)
+  - Prazo (deadline)
+  - Data de Criação (createdAt)
+  - Data de Atualização (updatedAt)
+
+Requisitos:
+
+* Permitir criar o Projeto;
+* Permitir alterar o Projeto;
+* Permitir deletar o Projeto;
+
+* Permitir criar a Tarefa;
+* Permitir alterar a Tarefa;
+* Permitir deletar a Tarefa;
+
+Regras de Negócio:
+
+* Não irá conter um sistema de login;
+* Não haverá o conceito de usuário;
+* Toda tarefa deve pertencer a um projeto;
+
+Tecnologias Utilizadas:
+
+* Java
+* Mysql
+
+
+Tarefas para concluir o Projeto do Sistema:
+
+* Criação do banco de dados (OK)
+* Criação das classes de modelo (OK)
+* Criação da conexão com o banco de dados (OK)
+* Criação das classes de controle (Acesso aos dados do banco)
+* Criação da interface gráfica
+  - Criação da tela principal
+      - Criação do CellRederer Prazo
+      - Criação do CellRederer Editar e Deletar
+  - Criação da tela de Cadastro de Projeto
+  - Criação da tela de Cadastro de Tarefa
+* Implementação dos eventos
+  - Validações
+* Ajustes finais
+* Teste da aplicação
